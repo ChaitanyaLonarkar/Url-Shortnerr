@@ -4,19 +4,22 @@ import connectDB from "./config/mongodb.config.js";
 import dotenv from "dotenv";
 import { redirectToLongUrl } from "./src/controllers/short_url.controller.js";
 import cors from "cors";
-
+import authRoutes from "./src/routes/auth.routes.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(cors());
+app.use(cookieParser());
 
 // app.get("/", (req, res) => {
 //   res.send("server in running");
 // });
 
 app.use("/api/create", shortUrlroute);
+app.use("/api/auth", authRoutes);
 app.get("/:id",redirectToLongUrl)
 
 app.listen(3000, () => {

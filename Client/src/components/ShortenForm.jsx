@@ -38,7 +38,7 @@ function ShortenForm() {
   //   useEffect(() => {}, [shortenedUrl]);
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-5 border-2 rounded-md ">
+    <div className="max-w-md mx-auto mt-5 p-5 border-2 rounded-md shadow-[8px_8px_0_0_#000]  ">
       <h2 className="text-xl font-bold mb-4">Shorten Your URL</h2>
       <form onSubmit={handleSubmit}>
         <input
