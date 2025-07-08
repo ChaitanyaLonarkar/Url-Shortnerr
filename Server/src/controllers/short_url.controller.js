@@ -3,14 +3,39 @@ import { nanoid } from "nanoid";
 
 export const createShortUrl = async (req, res) => {
   try {
-    const { longUrl } = req.body;
+    const data = req.body;
+    console.log("Received long URL:", data);
+    console.log("user:", req.user);
+
+    var shortUrl;
+    if (req.user) {
+       shortUrl = await createShortUrlWithUser(
+        data.longUrl,
+        req.user.id,
+        data.customUrl
+      );
+    } else {
+     shortUrl = await createShortUrlWithoutUser(data.longUrl);
+    }
+    return res.status(201).json({
+      shortUrl: shortUrl, 
+      message: "Short URL created successfully",
+    });
+  } catch (error) {
+    console.error("Error creating short URL:", error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+export const createShortUrlWithoutUser = async (longUrl) => {
+  try {
     // console.log("Received long URL:", longUrl);
     if (!longUrl) {
-      return res.status(400).json({ error: "Long URL is required" });
+      return "longUrl is required";
     }
 
     const shortUrl = nanoid(7); // Generate a unique short URL using nanoid
-    console.log("Generated short URL:", shortUrl);
+    // console.log("Generated short URL:", shortUrl);
     // Simulate saving to a database
     const newUrl = new shortUrlSchema({
       longUrl,
@@ -19,17 +44,41 @@ export const createShortUrl = async (req, res) => {
     await newUrl.save(); // Save the new URL to the database
 
     // await saveShortUrlToDatabase(longUrl, shortUrl);
-    res.status(201).json({ shortUrl });
+    return shortUrl; // Return the generated short URL
   } catch (error) {
     console.error("Error creating short URL:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    return "Error creating short URL:", error.message;
+  }
+};
+
+export const createShortUrlWithUser = async (longUrl, userid, customUrl=null) => {
+  try {
+    console.log("Received long URL:", longUrl, userid, customUrl);
+    if (!longUrl) {
+      return "longUrl is required";
+    }
+
+    const shortUrl = customUrl || nanoid(7); // Generate a unique short URL using nanoid
+    // console.log("Generated short URL:", shortUrl);
+    // Simulate saving to a database
+    const newUrl = new shortUrlSchema({
+      longUrl,
+      shortUrl,
+      user: userid, // Save the user ID
+    });
+    await newUrl.save(); // Save the new URL to the database
+
+    // await saveShortUrlToDatabase(longUrl, shortUrl);
+    return shortUrl; // Return the generated short URL
+  } catch (error) {
+    return "Error creating short URL with user:", error.message;
   }
 };
 
 export const redirectToLongUrl = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("Received short URL:", id);
+    // console.log("Received short URL:", id);
 
     // Simulate fetching from a database
     const urlEntry = await shortUrlSchema.findOne({ shortUrl: id });
@@ -39,10 +88,9 @@ export const redirectToLongUrl = async (req, res) => {
     }
 
     res.redirect(urlEntry.longUrl);
-
   } catch (error) {
     console.error("Error redirecting to long URL:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-
 };
+

@@ -1,10 +1,8 @@
 import jwt from "jsonwebtoken";
 
-export const authorization = (req, res, next) => {
+export const attachUser = (req, res, next) => {
   const token = req.cookies.access_token;
-  if (!token) {
-    return res.status(401).json({ error: "Unauthorize - no token provided or you need to login" });
-  }
+  if(!token) return next()
   try {
     const data = jwt.verify(token, process.env.JWT_SECRET);
       if (!data) {
@@ -26,4 +24,3 @@ export const authorization = (req, res, next) => {
     });
   }
 };
-
