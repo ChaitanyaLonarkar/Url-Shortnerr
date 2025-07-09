@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 
 
-function ShortenForm() {
+ const ShortenForm = () =>{
   const [longUrl, setLongUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
 
   const shortenUrl = async (longUrl) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/create", {
+      const response = await axiosInstance.post("api/create", {
         longUrl        });
         // const response = await axios.post(process.env.REACT_APP_API_URL + "/api/create", {
         // longUrl        });
@@ -38,7 +38,7 @@ function ShortenForm() {
   //   useEffect(() => {}, [shortenedUrl]);
 
   return (
-    <div className="max-w-md mx-auto mt-5 p-5 border-2 rounded-md shadow-[8px_8px_0_0_#000]  ">
+    <div className="max-w-md mx-auto mt-5 p-5 border-3 font-mono  shadow-[8px_8px_0_0_#000]  ">
       <h2 className="text-xl font-bold mb-4">Shorten Your URL</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -81,3 +81,4 @@ function ShortenForm() {
 }
 
 export default ShortenForm;
+

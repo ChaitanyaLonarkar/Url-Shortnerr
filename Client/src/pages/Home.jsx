@@ -1,14 +1,17 @@
 import React from "react";
 import ShortenForm from "../components/ShortenForm";
+import Navbar from "../components/Navbar";
 
 function Home() {
   return (
     <>
-      <div>
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="min-h-screen flex flex-col">
+        
+        <div className="flex flex-col items-center justify-center  bg-gray-100 ">
           <h1 className="text-4xl font-bold mb-6">URL Shortener</h1>
           <p className="text-lg mb-4 w-2xl text-center">
-            Welcome to the URL Shortener service. Here you can shorten your long
+            Welcome to the URL Shortener service. 
+            <br />Here you can shorten your long
             URLs and share them easily.
           </p>
           <ShortenForm/>
