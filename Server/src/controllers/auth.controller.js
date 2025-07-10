@@ -4,13 +4,19 @@ import { hashPassword, comparePassword ,generateToken } from "../utils/helper.js
 export const registerUser = async (req, res) => {
   try {
     const { username, password, email } = req.body;
- 
-    console.log("Registering user:", username, email,password);
+    // console.log("Registering user:", username, email,password);
+
+    const existingUsername = await User.findOne({ username });
+    // console.log("Existing user:", existingUser);
+    if (existingUsername!== null) {
+      return res.status(401).json({ error: "Username already taken" });
+    }
+
     // Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      // return res.status(400).json({ error: "User already exists" });
-      throw new Error("User already exists");
+    const existingUser = await User.findOne({ email  });
+    // console.log("Existing user:", existingUser);
+    if (existingUser!== null) {
+      return res.status(401).json({ error: "User with this email already exists" });
     }
 
     const hashedPassword = await hashPassword(password);
@@ -22,6 +28,7 @@ export const registerUser = async (req, res) => {
     });
     await newUser.save();
     res.status(201).json({ message: "User registered successfully" });
+
   } catch (error) {
     console.error("Error registering user:", error);
     res.status(500).json({ error: error || "Internal Server Error" });
