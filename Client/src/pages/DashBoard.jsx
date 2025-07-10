@@ -1,5 +1,6 @@
 import React from 'react'
 import ShortenForm from '../components/ShortenForm'
+import UserUrl from '../components/UserUrl'
 
 
 const DashboardPage = () => {
@@ -8,7 +9,7 @@ const DashboardPage = () => {
     <div className="bg-white -mt-20 p-8 rounded-lg shadow-md w-full max-w-4xl">
       <h1 className="text-2xl font-bold text-center mb-6">URL Shortener</h1>
       <ShortenForm/>
-      {/* <UserUrl/> */}
+      <UserUrl/>
     </div>
   </div>
   )

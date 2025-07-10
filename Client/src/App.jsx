@@ -7,13 +7,12 @@ import RegisterForm from './components/RegisterForm'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar'
 import { Toaster } from 'react-hot-toast';
+import DashboardPage from './pages/DashBoard'
+import { MyContextProvider } from './Context/ContextApi'
 function App() {
 
   return (
-    <>
-      {/* <Home/> */}
-     {/* <AuthPage /> */}
-
+    <MyContextProvider>
      <BrowserRouter>
       <Navbar />
       <Toaster/>
@@ -23,10 +22,11 @@ function App() {
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterForm />} />
         {/* <Route path="/dashboard/*" element={isAuthenticated() ? <Dashboard /> : <Navigate to="/login" />} /> */}
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
       {/* <Footer /> */}
     </BrowserRouter>
-    </>
+    </MyContextProvider>
   )
 }
 

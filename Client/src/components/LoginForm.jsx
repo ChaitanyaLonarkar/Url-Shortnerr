@@ -2,29 +2,51 @@ import React from "react";
 import { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import axiosInstance from "../utils/axiosInstance"; 
-import { Navigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useContext } from "react";
+import { MyContext } from "../Context/ContextApi.jsx"; // 
 
 const LoginForm =()=>{
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("che@123");
+  const [password, setPassword] = useState("che@123");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const {currentUser,setCurrentUser} = useContext(MyContext);
 
-
-  const handleSubmit = async (e) => {   }
-//   const navigate = useNavigate();
+  const handleSubmit = async (e) => {  
+    try{
+      e.preventDefault();
+      setLoading(true);
+      const data = await axiosInstance.post("/api/auth/login", {
+        email,
+        password,
+      });
+      console.log("Login data:", data);
+      setCurrentUser(data.data.user);
+      setLoading(false);
+      
+      if (data === null) {
+        throw new Error("Login failed. Please try again.");
+      }
+      toast.success("Login successful! Please log in.");
+      setLoading(false);
+      navigate("/dashboard");
+    }
+    catch (error) {
+      console.error("Error during login:", error);
+      setLoading(false);
+      toast.error(
+        error?.response?.data?.error || "Login failed. Please try again." 
+      );
+    }
+   }
 
   return (
     <div>
       <div className="w-full max-w-md mx-auto">
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
-
-          {/* {error && (
-                    <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
-                        {error}
-                    </div>
-                )} */}
 
           <div className="mb-4">
             <label

@@ -61,7 +61,7 @@ export const loginUser = async (req, res) => {
         sameSite: "Lax",
       })
       .status(200)
-      .json({ message: "Login successful" });
+      .json({ user:user, message: "Login successful" });
 
   } catch (error) {
     console.error("Error logging in user:", error);
