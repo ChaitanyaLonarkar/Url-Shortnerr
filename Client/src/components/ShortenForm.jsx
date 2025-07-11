@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import axiosInstance from "../utils/axiosInstance";
-
-
- const ShortenForm = () =>{
+import toast from "react-hot-toast";
+const ShortenForm = () => {
   const [longUrl, setLongUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
-
+  const [customUrl, setCustomUrl] = useState("");
   const shortenUrl = async (longUrl) => {
     try {
       const response = await axiosInstance.post("api/create", {
-        longUrl        });
-        // const response = await axios.post(process.env.REACT_APP_API_URL + "/api/create", {
-        // longUrl        });
+        longUrl,
+        customUrl,
+      });
 
-        console.log("Response:", response);
+      console.log("Response:", response);
       if (!response) {
         throw new Error("Failed to shorten URL");
       }
-      const data =response.data;
-      setShortenedUrl("http://localhost:3000/"+data.shortUrl);
+      const data = response.data;
+      setShortenedUrl("http://localhost:3000/" + data.shortUrl);
     } catch (error) {
       console.error("Error:", error);
       alert("Error shortening URL. Please try again.");
@@ -32,10 +31,8 @@ import axiosInstance from "../utils/axiosInstance";
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(shortenedUrl);
-    alert("Shortened URL copied to clipboard!");
+    toast.success("Shortened URL copied to clipboard!");
   };
-
-  //   useEffect(() => {}, [shortenedUrl]);
 
   return (
     <div className="max-w-md mx-auto mt-5 p-5 border-3 font-mono  shadow-[8px_8px_0_0_#000]  ">
@@ -46,9 +43,27 @@ import axiosInstance from "../utils/axiosInstance";
           placeholder="Enter your long URL"
           value={longUrl}
           onChange={(e) => setLongUrl(e.target.value)}
-          className="w-full p-2 border rounded mb-4"
+          className="w-full p-2 border rounded mb-2"
           required
         />
+
+        <div className="my-4">
+          <label
+            htmlFor="customSlug"
+            className="block text-lg font-bold text-gray-700 "
+          >
+            Custom URL (optional)
+          </label>
+          <input
+            type="text"
+            id="customSlug"
+            value={customUrl}
+            onChange={(event) => setCustomUrl(event.target.value)}
+            placeholder="Enter custom slug"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
         <button
           type="submit"
           className="w-full bg-blue-500 text-white p-2
@@ -78,7 +93,6 @@ import axiosInstance from "../utils/axiosInstance";
       )}
     </div>
   );
-}
+};
 
 export default ShortenForm;
-
