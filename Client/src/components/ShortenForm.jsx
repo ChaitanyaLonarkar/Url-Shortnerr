@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import toast from "react-hot-toast";
-const ShortenForm = () => {
+const ShortenForm = ({setIsReLoading}) => {
   const [longUrl, setLongUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
   const [customUrl, setCustomUrl] = useState("");
@@ -19,10 +19,13 @@ const ShortenForm = () => {
       }
       const data = response.data;
       setShortenedUrl("http://localhost:3000/" + data.shortUrl);
+      setIsReLoading(true);
+      toast.success("URL shortened successfully!");
     } catch (error) {
       console.error("Error:", error);
       alert("Error shortening URL. Please try again.");
     }
+   
   };
   const handleSubmit = (e) => {
     e.preventDefault();

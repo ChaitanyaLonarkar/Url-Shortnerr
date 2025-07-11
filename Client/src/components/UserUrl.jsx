@@ -3,7 +3,7 @@ import axiosInstance from "../utils/axiosInstance";
 import { use } from "react";
 import { useEffect } from "react";
 
-const UserUrl = () => {
+const UserUrl = ({isReLoading, setIsReLoading}) => {
   const [urls, setUrls] = useState({ urls: [] });
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -22,11 +22,12 @@ const UserUrl = () => {
       console.error("Error fetching URLs:", error);
     } finally {
       setIsLoading(false);
+      setIsReLoading(false);
     }
   };
   useEffect(() => {
     fetchUrls();
-  }, []);
+  }, [isReLoading]);
 
   if (isLoading) {
     return (
