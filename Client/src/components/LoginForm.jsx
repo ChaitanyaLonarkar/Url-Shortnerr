@@ -23,15 +23,17 @@ const LoginForm =()=>{
         password,
       });
       console.log("Login data:", data);
-      setCurrentUser(data.data.user);
+      localStorage.setItem("user", JSON.stringify(data.data.user));
       setLoading(false);
       
       if (data === null) {
         throw new Error("Login failed. Please try again.");
       }
-      toast.success("Login successful! Please log in.");
+      toast.success("Login successful! Redirecting to dashboard...");
       setLoading(false);
+    
       navigate("/dashboard");
+      window.location.reload(); // Reload the page to reflect changes
     }
     catch (error) {
       console.error("Error during login:", error);

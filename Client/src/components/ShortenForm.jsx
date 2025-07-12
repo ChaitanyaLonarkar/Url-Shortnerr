@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import toast from "react-hot-toast";
-const ShortenForm = ({setIsReLoading}) => {
+import { MyContext } from "../Context/ContextApi.jsx"; // Importing the contex
+const ShortenForm = ({ setIsReLoading }) => {
   const [longUrl, setLongUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
   const [customUrl, setCustomUrl] = useState("");
+  const { currentUser } = useContext(MyContext);
   const shortenUrl = async (longUrl) => {
     try {
       const response = await axiosInstance.post("api/create", {
@@ -25,7 +27,6 @@ const ShortenForm = ({setIsReLoading}) => {
       console.error("Error:", error);
       alert("Error shortening URL. Please try again.");
     }
-   
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,22 +51,24 @@ const ShortenForm = ({setIsReLoading}) => {
           required
         />
 
-        <div className="my-4">
-          <label
-            htmlFor="customSlug"
-            className="block text-lg font-bold text-gray-700 "
-          >
-            Custom URL (optional)
-          </label>
-          <input
-            type="text"
-            id="customSlug"
-            value={customUrl}
-            onChange={(event) => setCustomUrl(event.target.value)}
-            placeholder="Enter custom slug"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+        {currentUser && (
+          <div className="my-4">
+            <label
+              htmlFor="customSlug"
+              className="block text-lg font-bold text-gray-700 "
+            >
+              Custom URL (optional)
+            </label>
+            <input
+              type="text"
+              id="customSlug"
+              value={customUrl}
+              onChange={(event) => setCustomUrl(event.target.value)}
+              placeholder="Enter custom slug"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        )}
 
         <button
           type="submit"
