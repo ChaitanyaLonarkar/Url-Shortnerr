@@ -45,7 +45,7 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
       <div className="flex justify-center my-8 h-56 items-center">
         <div className="animate-pulse ">
           <svg
-          className="w-14 h-12 mx-auto text-gray-400 mb-3"
+          className="w-14 h-12 mx-auto text-[#482307] mb-3"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -88,38 +88,38 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
   }
 
   return (
-    <div className="bg-white rounded-lg mt-12 shadow-md overflow-hidden">
+    <div className=" border-3 p-5 mt-12 shadow-[8px_8px] overflow-hidden">
       <h2 className="text-2xl font-bold mb-4">Your URLs</h2>
       <div className="overflow-x-auto h-56">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-gray-200 text-[]">
+          <thead className="bg-[#F8EEDB]">
             <tr>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
               >
                 Original URL
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
               >
                 Short URL
               </th>
              
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
               >
                 Actions
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className=" divide-y divide-gray-200">
             {urls.urls.reverse().map((url) => (
-              <tr key={url._id} className="hover:bg-gray-50">
+              <tr key={url._id} className="hover:bg-[#f3efe6]">
                 <td className="px-6 py-4">
-                  <div className="text-sm text-gray-900 truncate max-w-xs">
+                  <div className="text-sm  truncate max-w-xs">
                     {url.longUrl}
                   </div>
                 </td>
@@ -144,11 +144,11 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
                         url._id
                       )
                     }
-                    className={`inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md shadow-sm ${
+                    className={`inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md shadow-sm cursor-pointer ${
                       copiedId === url._id
-                        ? "bg-green-600 text-white hover:bg-green-700"
-                        : "bg-blue-600 text-white hover:bg-blue-700"
-                    } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200`}
+                        ? "bg-[#E15549] text-white hover:bg-[#f0958d]"
+                        : "bg-[#482307] text-white hover:bg-[#674831]"
+                    } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#482307] transition-colors duration-200`}
                   >
                     {copiedId === url._id ? (
                       <>

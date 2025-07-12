@@ -1,4 +1,19 @@
-@tailwind base;
-@tailwind components;
+
 @tailwind utilities;
 @import "tailwindcss";
+
+
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #50e3c2;
+  --background-color: #FFFAED;
+    /* --background-color: #FFF6E1; */
+  --text-color: #482307;
+  --secondary-text-color: #A1724E;
+  --border-color: #e0e0e0;
+}
+
+body {
+  background-color: var(--background-color);
+    color: var(--text-color);
+}

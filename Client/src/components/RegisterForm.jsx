@@ -44,10 +44,10 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-md mx-auto h-[80vh] flex items-center justify-center">
       <div
         onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="bg-[#FFF8E5] border-3 shadow-[6px_6px] px-8 pt-6 pb-8 mb-4 w-[400px] "
       >
         <h2 className="text-2xl font-bold text-center mb-6">
           Create an Account
@@ -55,13 +55,13 @@ const RegisterForm = () => {
 
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-sm font-bold mb-2"
             htmlFor="name"
           >
             Username
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
             id="name"
             type="text"
             placeholder="Username"
@@ -73,13 +73,13 @@ const RegisterForm = () => {
 
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-sm font-bold mb-2"
             htmlFor="email"
           >
             Email
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
             id="email"
             type="email"
             placeholder="Email"
@@ -91,13 +91,13 @@ const RegisterForm = () => {
 
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block  text-sm font-bold mb-2"
             htmlFor="password"
           >
             Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
             placeholder="******************"
@@ -110,7 +110,7 @@ const RegisterForm = () => {
 
         <div className="flex items-center justify-between">
           <button
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+            className={`bg-[#482307] hover:bg-[#4a2b2b] text-white font-bold py-2 px-4 rounded focus:outline-none cursor-pointer focus:shadow-outline  w-full ${
               loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
             type="submit"
@@ -122,11 +122,11 @@ const RegisterForm = () => {
         </div>
 
         <div className="text-center mt-4">
-          <p className="cursor-pointer text-sm text-gray-600">
+          <p className="  ">
             Already have an account?{" "}
             <span
               onClick={() => (window.location.href = "/login")}
-              className="text-blue-500 hover:text-blue-700"
+              className="text-[#482307] hover:text-[#A1724E] font-semibold cursor-pointer"
             >
               Sign In
             </span>

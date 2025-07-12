@@ -39,15 +39,15 @@ const ShortenForm = ({ setIsReLoading }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-5 p-5 border-3 font-mono  shadow-[8px_8px_0_0_#000]  ">
+    <div className="w-[400px] mx-auto mt-5 p-5 border-3 font-mono shadow-[8px_8px_0_0_#482307]  ">
       <h2 className="text-xl font-bold mb-4">Shorten Your URL</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="url"
           placeholder="Enter your long URL"
           value={longUrl}
           onChange={(e) => setLongUrl(e.target.value)}
-          className="w-full p-2 border rounded mb-2"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:#482307"
           required
         />
 
@@ -55,7 +55,7 @@ const ShortenForm = ({ setIsReLoading }) => {
           <div className="my-4">
             <label
               htmlFor="customSlug"
-              className="block text-lg font-bold text-gray-700 "
+              className="block text-lg font-bold  "
             >
               Custom URL (optional)
             </label>
@@ -65,15 +65,15 @@ const ShortenForm = ({ setIsReLoading }) => {
               value={customUrl}
               onChange={(event) => setCustomUrl(event.target.value)}
               placeholder="Enter custom slug"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:#482307"
             />
           </div>
         )}
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2
-          cursor-pointer loader rounded hover:bg-blue-600"
+          className="w-full bg-[#482307] text-white p-2
+          cursor-pointer loader rounded hover:[#482307] "
         >
           Shorten
         </button>
