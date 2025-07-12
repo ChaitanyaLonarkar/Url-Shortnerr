@@ -12,6 +12,8 @@ import { MyContextProvider } from './Context/ContextApi'
 function App() {
 
   return (
+    <div className="App h-full flex flex-col justify-between">
+
     <MyContextProvider>
      <BrowserRouter>
       <Navbar />
@@ -27,6 +29,8 @@ function App() {
       {/* <Footer /> */}
     </BrowserRouter>
     </MyContextProvider>
+    </div>
+
   )
 }
 

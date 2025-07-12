@@ -16,10 +16,10 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
       setIsError(false);
       const res = await axiosInstance.get("/api/urls");
       setUrls(res.data);
-      console.log("Fetched URLs:", res.data);
+      // console.log("Fetched URLs:", res.data);
     } catch (error) {
       setIsError(true);
-      console.error("Error fetching URLs:", error);
+      // console.error("Error fetching URLs:", error);
     } finally {
       setIsLoading(false);
       setIsReLoading(false);
@@ -29,10 +29,37 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
     fetchUrls();
   }, [isReLoading]);
 
-  if (isLoading) {
+  const handleCopy = (url, id) => {
+    navigator.clipboard.writeText(url)
+    setCopiedId(id)
+    
+    // Reset the copied state after 2 seconds
+    setTimeout(() => {
+      setCopiedId(null)
+    }, 2000)
+  }
+
+
+  if (isLoading ||isReLoading) {
     return (
-      <div className="flex justify-center my-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+      <div className="flex justify-center my-8 h-56 items-center">
+        <div className="animate-pulse ">
+          <svg
+          className="w-14 h-12 mx-auto text-gray-400 mb-3"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13 10V3L4 14h7v7l9-11h-7z"
+          ></path>
+        </svg>
+          <p className="text-gray-500 ">Loading URLs...</p>
+        </div>
       </div>
     );
   }
@@ -61,7 +88,8 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
   }
 
   return (
-    <div className="bg-white rounded-lg mt-5 shadow-md overflow-hidden">
+    <div className="bg-white rounded-lg mt-12 shadow-md overflow-hidden">
+      <h2 className="text-2xl font-bold mb-4">Your URLs</h2>
       <div className="overflow-x-auto h-56">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -98,7 +126,7 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
                 <td className="px-6 py-4">
                   <div className="text-sm">
                     <a
-                      href={`http://localhost:3000/${url.short_url}`}
+                      href={`http://localhost:3000/${url.shortUrl}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-900 hover:underline"
@@ -112,7 +140,7 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
                   <button
                     onClick={() =>
                       handleCopy(
-                        `http://localhost:3000/${url.short_url}`,
+                        `http://localhost:3000/${url.shortUrl}`,
                         url._id
                       )
                     }
