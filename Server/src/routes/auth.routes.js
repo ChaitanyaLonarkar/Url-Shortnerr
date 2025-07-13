@@ -12,7 +12,7 @@ router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 
 router.get("/", authorization, (req, res) => {
-  return res.json({ status: true, message: "Authorized user" });
+  return res.status(200).json({ status: true, message: "Authorized user" });
 });
 
 export default router;

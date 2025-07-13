@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import Footer from "./components/Footer";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, isCookie } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
 import DashboardPage from "./pages/DashBoard";
@@ -14,9 +14,19 @@ import PageLoader from "./components/PageLoader";
 function App() {
   const { currentUser, setCurrentUser } = useContext(MyContext);
 
-  const isAuthenticated = () => {
-    return currentUser !== null && currentUser !== undefined;
-  };
+  // const isAuthenticated = () => {
+  //   const user = localStorage.getItem("user");
+  //   const cookie = document.cookie
+  //     .split("; ")
+  //     .find((row) => row.startsWith("access_token="));
+  //   console.log("Cookie:", cookie);
+
+  //   if (user) {
+  //     setCurrentUser(JSON.parse(user));
+  //     return true;
+  //   }
+  //   return false;
+  // };
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -24,13 +34,14 @@ function App() {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500); // Adjust delay as needed
+   
   }, []);
 
   return (
     <>
-      {isLoading ? (
+      {/* {isLoading ? (
         <PageLoader />
-      ) : (
+      ) : ( */}
         <div className="App h-full flex flex-col justify-between">
           <BrowserRouter>
             <Navbar />
@@ -39,7 +50,7 @@ function App() {
               {/* <Route path="/" element={<Navigate to="/login" />} /> */}
               <Route
                 path="/"
-                element={currentUser ? <DashboardPage /> : <Home />}
+                element={currentUser  ? <DashboardPage /> : <Home />}
               />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegisterForm />} />
@@ -49,11 +60,13 @@ function App() {
                   currentUser ? <DashboardPage /> : <Navigate to="/login" />
                 }
               />
+              
+              
             </Routes>
             <Footer />
           </BrowserRouter>
         </div>
-      )}
+      {/* )} */}
     </>
   );
 }

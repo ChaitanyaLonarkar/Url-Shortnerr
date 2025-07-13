@@ -58,6 +58,7 @@ export const loginUser = async (req, res) => {
     res.cookie("access_token", token, {
         httpOnly: true,
         secure: true, // Ensures the cookie is only sent over HTTPS
+        maxAge: 10 * 24 * 60 * 60 * 1000,    
         sameSite: "Lax",
       })
       .status(200)

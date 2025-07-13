@@ -6,17 +6,15 @@ function Home() {
   return (
     <>
         
-        <div className="flex flex-col items-center justify-center h-[80vh] ">
-          <h1 className="text-4xl font-bold mb-6">URL Shortener</h1>
-          <p className="text-lg mb-4 w-2xl text-center">
+        <div className=" flex flex-col items-center justify-center md:h-[73vh] h-[66vh]  ">
+          <h1 className="md:text-4xl text-2xl font-bold mb-6">URL Shortener</h1>
+          <p className="md:text-lg mb-4 md:w-2xl text-center">
             Welcome to the URL Shortener service. 
             <br />Here you can shorten your long
             URLs and share them easily.
           </p>
           <ShortenForm/>
-          <p className="mt-6 text-sm text-[#482307]">
-            ©2025 URL Shortener Service. Build with love.
-          </p>
+          
         </div>
     </>
   );

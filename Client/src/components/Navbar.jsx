@@ -28,7 +28,7 @@ export default function Navbar() {
   };
   return (
     <div>
-      <nav className=" py-4 px-28 m-5 rounded-4xl shadow-[6px_6px] border-3 border-black-700">
+      <nav className="px-4 py-4 lg:px-28 m-4 lg:m-5 rounded-4xl shadow-[6px_6px] border-3 border-black-700 ">
         <div className="container mx-auto flex justify-between items-center">
           <div className=" flex items-center gap-2">
             <svg
@@ -52,10 +52,10 @@ export default function Navbar() {
               <a href="/" className=" hover:text-[#A1724E] px-3 py-2">
                 Home
               </a>
+
             )}
-            <a href="/dashboard" className=" hover:text-[#A1724E] px-3 py-2">
-              Dashboard
-            </a>
+           
+            
             {currentUser ? (
               <button
                 onClick={handleLogout}
