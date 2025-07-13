@@ -2,7 +2,6 @@
 @tailwind utilities;
 @import "tailwindcss";
 
-
 :root {
   --primary-color: #4a90e2;
   --secondary-color: #50e3c2;
@@ -16,4 +15,36 @@
 body {
   background-color: var(--background-color);
     color: var(--text-color);
+}
+
+.typing {
+  animation: animate-typing 2s steps(20) infinite alternate, blink .7s infinite;
+}
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}
+.animation-delay-400 {
+  animation-delay: 0.4s;
+}
+
+@keyframes animate-typing {
+  from {
+    width: 0;
+    visibility: hidden;
+  }
+  to {
+    width: 100%;
+    visibility: visible;
+  }
+
+  
+}
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: black;
+  }
+  
 }
