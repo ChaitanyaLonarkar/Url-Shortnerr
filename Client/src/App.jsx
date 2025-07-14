@@ -35,7 +35,7 @@ function App() {
       setIsLoading(false);
     }, 1500); // Adjust delay as needed
    
-  }, []);
+  }, [isLoading]);
 
   return (
     <>
@@ -66,7 +66,7 @@ function App() {
             <Footer />
           </BrowserRouter>
         </div>
-      {/* )} */}
+      {/* )}  */}
     </>
   );
 }

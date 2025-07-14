@@ -88,28 +88,28 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
   }
 
   return (
-    <div className=" border-3 p-5 mt-12 shadow-[8px_8px] overflow-hidden">
-      <h2 className="text-2xl font-bold mb-4">Your URLs</h2>
+    <div className=" w-[fit-content] mx-auto border-3 p-3 md:p-5 mt-12 shadow-[8px_8px] overflow-hidden">
+      <h2 className="text-lg md:text-2xl font-bold mb-4">Your URLs</h2>
       <div className="overflow-x-auto h-56">
-        <table className="min-w-full divide-y divide-gray-200 text-[]">
+        <table className="min-w-full divide-y divide-gray-200 ">
           <thead className="bg-[#F8EEDB]">
             <tr>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
+                className="px-2 py-2 md:px-6 md:py-4 text-left text-xs font-medium  uppercase tracking-wider"
               >
                 Original URL
               </th>
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
+                className="px-2 py-2 md:px-6 md:py-4 text-left text-xs font-medium uppercase tracking-wider"
               >
                 Short URL
               </th>
              
               <th
                 scope="col"
-                className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
+                className="px-2 py-2 md:px-6 md:py-4 text-left text-xs font-medium  uppercase tracking-wider"
               >
                 Actions
               </th>
@@ -118,12 +118,12 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
           <tbody className=" divide-y divide-gray-200">
             {urls.urls.reverse().map((url) => (
               <tr key={url._id} className="hover:bg-[#f3efe6]">
-                <td className="px-6 py-4">
+                <td className="w-[200px] px-2 py-2 md:px-6 md:py-4">
                   <div className="text-sm  truncate max-w-xs">
                     {url.longUrl}
                   </div>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-2 py-2 md:px-6 md:py-4">
                   <div className="text-sm">
                     <a
                       href={`http://localhost:3000/${url.shortUrl}`}
@@ -136,7 +136,7 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
                   </div>
                 </td>
                 
-                <td className="px-6 py-4 text-sm font-medium">
+                <td className="px-2 py-2 md:px-6 md:py-4 text-sm font-medium">
                   <button
                     onClick={() =>
                       handleCopy(
@@ -148,7 +148,7 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
                       copiedId === url._id
                         ? "bg-[#E15549] text-white hover:bg-[#f0958d]"
                         : "bg-[#482307] text-white hover:bg-[#674831]"
-                    } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#482307] transition-colors duration-200`}
+                    } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#482307] transition-colors duration-200 w-[100px] `} 
                   >
                     {copiedId === url._id ? (
                       <>

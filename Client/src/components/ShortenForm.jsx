@@ -8,6 +8,7 @@ const ShortenForm = ({ setIsReLoading }) => {
   const [shortenedUrl, setShortenedUrl] = useState("");
   const [customUrl, setCustomUrl] = useState("");
   const { currentUser } = useContext(MyContext);
+
   const shortenUrl = async (longUrl) => {
     try {
       const response = await axiosInstance.post("api/create", {
@@ -15,17 +16,20 @@ const ShortenForm = ({ setIsReLoading }) => {
         customUrl,
       });
 
-      console.log("Response:", response);
-      if (!response) {
+      // console.log("Response:", response);
+
+      if (!response.data.shortUrl) {
         throw new Error("Failed to shorten URL");
       }
       const data = response.data;
       setShortenedUrl("http://localhost:3000/" + data.shortUrl);
-      setIsReLoading(true);
+
+      currentUser && setIsReLoading(true);
+
       toast.success("URL shortened successfully!");
     } catch (error) {
-      console.error("Error:", error);
-      alert("Error shortening URL. Please try again.");
+      // console.error("Error:", error);
+      toast.error("Error shortening URL. Please try again.");
     }
   };
   const handleSubmit = (e) => {
@@ -41,7 +45,10 @@ const ShortenForm = ({ setIsReLoading }) => {
   return (
     <div className="md:w-[400px] w-[300px] mx-auto mt-5 p-5 border-3 font-mono shadow-[8px_8px_0_0_#482307]  ">
       <h2 className="md:text-xl font-bold mb-4">Shorten Your URL</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-sm md:text-base ">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 text-sm md:text-base "
+      >
         <input
           type="url"
           placeholder="Enter your long URL"
@@ -52,12 +59,12 @@ const ShortenForm = ({ setIsReLoading }) => {
         />
 
         {currentUser && (
-          <div className="md:my-4">
+          <div className="">
             <label
               htmlFor="customSlug"
               className="block md:text-lg font-bold mb-3  "
             >
-              Custom URL (optional)
+              Custom Slug (optional)
             </label>
             <input
               type="text"

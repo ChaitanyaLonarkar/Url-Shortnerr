@@ -46,9 +46,9 @@ const LoginForm =()=>{
 
   return (
     <div>
-      <div className="w-full max-w-md mx-auto h-[80vh] flex items-center justify-center">
+      <div className="w-full max-w-md mx-auto h-[65vh] md:h-[75vh] flex items-center justify-center">
         <div className="bg-[#FFF8E5] border-3 shadow-[6px_6px] px-8 pt-6 pb-8 mb-4 md:w-[400px] w-[300px] ">
-          <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
+          <h2 className="text-lg md:text-2xl font-bold text-center mb-6">Login</h2>
 
           <div className="mb-4">
             <label
@@ -100,11 +100,11 @@ const LoginForm =()=>{
           </div>
 
           <div className="text-center mt-4">
-            <p className="">
+            <p className="text-sm">
               Don't have an account?{" "}
               <span
                 onClick={() => window.location.href="/register"}
-                className="text-[#482307] hover:text-[#A1724E] font-semibold cursor-pointer"
+                className="text-[#482307] hover:text-[#A1724E] font-semibold cursor-pointer underline"
               >
                 Register
               </span>
