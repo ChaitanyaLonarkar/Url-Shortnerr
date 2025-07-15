@@ -20,9 +20,9 @@ app.use(cors(
 ));
 app.use(cookieParser());
 app.use(attachUser)
-// app.get("/", (req, res) => {
-//   res.send("server in running");
-// });
+app.get("/", (req, res) => {
+  res.send("server in running");
+});
 
 app.use("/api/create", shortUrlroute);
 app.use("/api/auth", authRoutes);
