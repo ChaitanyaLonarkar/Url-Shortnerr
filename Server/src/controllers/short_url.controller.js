@@ -9,16 +9,16 @@ export const createShortUrl = async (req, res) => {
 
     var shortUrl;
     if (req.user) {
-       shortUrl = await createShortUrlWithUser(
+      shortUrl = await createShortUrlWithUser(
         data.longUrl,
         req.user.id,
         data.customUrl
       );
     } else {
-     shortUrl = await createShortUrlWithoutUser(data.longUrl);
+      shortUrl = await createShortUrlWithoutUser(data.longUrl);
     }
     return res.status(201).json({
-      shortUrl: shortUrl, 
+      shortUrl: shortUrl,
       message: "Short URL created successfully",
     });
   } catch (error) {
@@ -51,11 +51,21 @@ export const createShortUrlWithoutUser = async (longUrl) => {
   }
 };
 
-export const createShortUrlWithUser = async (longUrl, userid, customUrl=null) => {
+export const createShortUrlWithUser = async (
+  longUrl,
+  userid,
+  customUrl = null
+) => {
   try {
     console.log("Received long URL:", longUrl, userid, customUrl);
     if (!longUrl) {
       return "longUrl is required";
+    }
+    const existingUrl = await shortUrlSchema.findOne({
+      longUrl,
+    });
+    if (existingUrl) {
+      return existingUrl.shortUrl;
     }
 
     const shortUrl = customUrl || nanoid(7); // Generate a unique short URL using nanoid
@@ -106,3 +116,21 @@ export const getAllUrls = async (req, res) => {
   }
 };
 
+export const deleteUrl = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("Received short URL ID for deletion:", id);
+
+    const deletedUrl = await shortUrlSchema.findOne({
+      shortUrl: id,
+       // Ensure the user owns the URL
+    });
+
+    console.log("Deleted URL:", deletedUrl);
+
+    res.status(200).json({ message: "Short URL deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting short URL:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}

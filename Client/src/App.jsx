@@ -29,6 +29,7 @@ function App() {
   // };
   const [isLoading, setIsLoading] = useState(true);
 
+  // console.log("Current User:", currentUser);
   useEffect(() => {
     // Simulate loading time (remove in production)
     const timer = setTimeout(() => {
@@ -50,7 +51,7 @@ function App() {
               {/* <Route path="/" element={<Navigate to="/login" />} /> */}
               <Route
                 path="/"
-                element={currentUser  ? <DashboardPage /> : <Home />}
+                element={currentUser ? <DashboardPage /> : <Home />}
               />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register" element={<RegisterForm />} />

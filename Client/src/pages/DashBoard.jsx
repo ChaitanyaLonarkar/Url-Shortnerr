@@ -15,8 +15,10 @@ const DashboardPage = () => {
   const authorization = async () => {
     try {
       const res = await axiosInstance.get("/api/auth");
-      // console.log("Authorization response:", res.data);
-      
+      // console.log("Authorization response:", res.data.error);
+      if (res.data.error) {
+        throw new Error(res.data.error);
+      }
     } catch (error) {
       // console.error("Authorization error:", error);
       navigate("/login");

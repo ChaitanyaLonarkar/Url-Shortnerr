@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 import { use } from "react";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const UserUrl = ({isReLoading, setIsReLoading}) => {
   const [urls, setUrls] = useState({ urls: [] });
@@ -25,6 +26,21 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
       setIsReLoading(false);
     }
   };
+
+  const handleDelete = async (id) => {
+    try {
+      await axiosInstance.delete(`/api/url/delete/${id}`);
+      // fetchUrls();
+      setIsReLoading(true);
+    } catch (error) {
+      console.error("Error deleting URL:", error);
+      toast.error("Failed to delete URL. Please try again.");
+    }
+    finally{
+      setIsReLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchUrls();
   }, [isReLoading]);
@@ -136,7 +152,7 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
                   </div>
                 </td>
                 
-                <td className="px-2 py-2 md:px-6 md:py-4 text-sm font-medium">
+                <td className="px-2 py-2 md:px-6 md:py-4 text-sm font-medium flex">
                   <button
                     onClick={() =>
                       handleCopy(
@@ -188,7 +204,13 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
                       </>
                     )}
                   </button>
+
+                  <button
+                  className="px-3 py-1 cursor-pointer" onClick={() => handleDelete(url._id)}>
+                    ❌ URL
+                  </button>
                 </td>
+                
               </tr>
             ))}
           </tbody>
