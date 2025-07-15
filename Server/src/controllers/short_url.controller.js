@@ -61,12 +61,16 @@ export const createShortUrlWithUser = async (
     if (!longUrl) {
       return "longUrl is required";
     }
-    const existingUrl = await shortUrlSchema.findOne({
-      longUrl,
-    });
-    if (existingUrl) {
-      return existingUrl.shortUrl;
+    if(!customUrl){
+
+      const existingUrl = await shortUrlSchema.findOne({
+        longUrl,
+      });
+      if (existingUrl) {
+        return existingUrl.shortUrl;
+      }
     }
+  
 
     const shortUrl = customUrl || nanoid(7); // Generate a unique short URL using nanoid
     // console.log("Generated short URL:", shortUrl);
