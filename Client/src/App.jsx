@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import DashboardPage from "./pages/DashBoard";
 import { MyContextProvider, MyContext } from "./Context/ContextApi";
 import PageLoader from "./components/PageLoader";
+import {Analytics} from '@vercel/analytics/react';
 
 function App() {
   const { currentUser, setCurrentUser } = useContext(MyContext);
@@ -66,6 +67,7 @@ function App() {
             </Routes>
             <Footer />
           </BrowserRouter>
+          <Analytics />
         </div>
       {/* )}  */}
     </>
