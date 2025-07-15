@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(cors(
   {
-    origin: process.env.ORIGIN,
+    origin: "https://url-shortnerr-seven.vercel.app",
     credentials: true,
   }
 ));
