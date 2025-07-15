@@ -32,6 +32,8 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
       await axiosInstance.delete(`/api/url/delete/${id}`);
       // fetchUrls();
       setIsReLoading(true);
+      toast.success("URL deleted successfully!");
+      fetchUrls();
     } catch (error) {
       console.error("Error deleting URL:", error);
       toast.error("Failed to delete URL. Please try again.");

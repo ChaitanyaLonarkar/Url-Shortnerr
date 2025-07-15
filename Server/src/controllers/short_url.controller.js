@@ -123,12 +123,12 @@ export const getAllUrls = async (req, res) => {
 export const deleteUrl = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("Received short URL ID for deletion:", id);
+    console.log("Received short URL ID for deletion:", req.params.id);
 
-    const deletedUrl = await shortUrlSchema.findOne({
-      shortUrl: id,
+    const deletedUrl = await shortUrlSchema.findByIdAndDelete(
+       req.params.id,
        // Ensure the user owns the URL
-    });
+    );
 
     console.log("Deleted URL:", deletedUrl);
 
