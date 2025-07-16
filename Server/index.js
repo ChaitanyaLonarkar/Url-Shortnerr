@@ -21,6 +21,7 @@ app.use(cors(
 app.use(cookieParser());
 app.use(attachUser)
 app.get("/", (req, res) => {
+  // connectDB()
   res.send("server in running");
 });
 
@@ -34,3 +35,4 @@ app.listen(3000, () => {
   connectDB();
   console.log("server is running on PORT 3000");
 });
+module.exports = app
