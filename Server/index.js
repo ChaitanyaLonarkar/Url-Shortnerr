@@ -31,8 +31,8 @@ app.get("/:id",redirectToLongUrl)
 app.get('/api/urls', getAllUrls)
 app.delete('/api/url/delete/:id', deleteUrl)
 
-app.listen(3000, () => {
-  connectDB();
-  console.log("server is running on PORT 3000");
-});
+// app.listen(3000, () => {
+//   connectDB();
+//   console.log("server is running on PORT 3000");
+// });
 module.exports = app
