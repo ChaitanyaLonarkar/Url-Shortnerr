@@ -8,8 +8,8 @@ import { useContext } from "react";
 import { MyContext } from "../Context/ContextApi.jsx"; // 
 
 const LoginForm =()=>{
-  const [email, setEmail] = useState("che@123");
-  const [password, setPassword] = useState("che@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {currentUser,setCurrentUser} = useContext(MyContext);

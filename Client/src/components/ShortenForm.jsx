@@ -8,20 +8,22 @@ const ShortenForm = ({ setIsReLoading }) => {
   const [shortenedUrl, setShortenedUrl] = useState("");
   const [customUrl, setCustomUrl] = useState("");
   const { currentUser } = useContext(MyContext);
+  const [loading, setLoading] = useState(false);
 
   const shortenUrl = async (longUrl) => {
+    setLoading(true);
     try {
       const response = await axiosInstance.post("api/create", {
         longUrl,
         customUrl,
       });
-
       // console.log("Response:", response);
 
       if (!response.data.shortUrl) {
         throw new Error("Failed to shorten URL");
       }
       const data = response.data;
+      setLoading(false);
       setShortenedUrl(import.meta.env.VITE_API_URL + data.shortUrl);
 
       currentUser && setIsReLoading(true);
@@ -30,6 +32,7 @@ const ShortenForm = ({ setIsReLoading }) => {
     } catch (error) {
       // console.error("Error:", error);
       toast.error("Error shortening URL. Please try again.");
+      setLoading(false);
     }
   };
   const handleSubmit = (e) => {
@@ -79,10 +82,15 @@ const ShortenForm = ({ setIsReLoading }) => {
 
         <button
           type="submit"
-          className="w-full bg-[#482307] text-white p-2
-          cursor-pointer loader rounded hover:[#482307] "
+          className={`w-full bg-[#482307] text-white p-2
+          cursor-pointer loader rounded hover:[#482307] 
+          ${
+                loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+          disabled={loading}
+          
         >
-          Shorten
+          {loading ? "Shortening..." : "Shorten "}
         </button>
       </form>
       {shortenedUrl && (
