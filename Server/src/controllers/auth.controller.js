@@ -59,7 +59,8 @@ export const loginUser = async (req, res) => {
         httpOnly: true,
         secure: true, // Ensures the cookie is only sent over HTTPS
         maxAge: 10 * 24 * 60 * 60 * 1000,    
-        sameSite: "Lax",
+        sameSite: "none",
+        secure: true,
       })
       .status(200)
       .json({ user:user, message: "Login successful" });

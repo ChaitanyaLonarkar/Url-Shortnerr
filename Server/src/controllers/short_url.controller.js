@@ -4,8 +4,8 @@ import { nanoid } from "nanoid";
 export const createShortUrl = async (req, res) => {
   try {
     const data = req.body;
-    console.log("Received long URL:", data);
-    console.log("user:", req.user);
+    // console.log("Received long URL:", data);
+    // console.log("user:", req.user);
 
     var shortUrl;
     if (req.user) {
@@ -57,7 +57,7 @@ export const createShortUrlWithUser = async (
   customUrl = null
 ) => {
   try {
-    console.log("Received long URL:", longUrl, userid, customUrl);
+    // console.log("Received long URL:", longUrl, userid, customUrl);
     if (!longUrl) {
       return "longUrl is required";
     }
@@ -123,14 +123,13 @@ export const getAllUrls = async (req, res) => {
 export const deleteUrl = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("Received short URL ID for deletion:", req.params.id);
+    // console.log("Received short URL ID for deletion:", req.params.id);
 
     const deletedUrl = await shortUrlSchema.findByIdAndDelete(
        req.params.id,
        // Ensure the user owns the URL
     );
-
-    console.log("Deleted URL:", deletedUrl);
+    // console.log("Deleted URL:", deletedUrl);
 
     res.status(200).json({ message: "Short URL deleted successfully" });
   } catch (error) {
