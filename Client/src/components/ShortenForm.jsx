@@ -22,7 +22,7 @@ const ShortenForm = ({ setIsReLoading }) => {
         throw new Error("Failed to shorten URL");
       }
       const data = response.data;
-      setShortenedUrl("http://localhost:3000/" + data.shortUrl);
+      setShortenedUrl(import.meta.env.VITE_API_URL + data.shortUrl);
 
       currentUser && setIsReLoading(true);
 
