@@ -144,12 +144,12 @@ const UserUrl = ({isReLoading, setIsReLoading}) => {
                 <td className="px-2 py-2 md:px-6 md:py-4">
                   <div className="text-sm">
                     <a
-                      href={`http://localhost:3000/${url.shortUrl}`}
+                      href={`${import.meta.env.VITE_API_URL+url.shortUrl}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-900 hover:underline"
                     >
-                      {`localhost:3000/${url.shortUrl}`}
+                      {`${import.meta.env.VITE_API_URL+url.shortUrl}`}
                     </a>
                   </div>
                 </td>
