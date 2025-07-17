@@ -24,7 +24,7 @@ const ShortenForm = ({ setIsReLoading }) => {
       }
       const data = response.data;
       setLoading(false);
-      setShortenedUrl(import.meta.env.VITE_API_URL + data.shortUrl);
+      setShortenedUrl(import.meta.env.VITE_API_URL +"/"+ data.shortUrl);
 
       currentUser && setIsReLoading(true);
 
